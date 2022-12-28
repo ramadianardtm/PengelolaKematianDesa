@@ -13,10 +13,10 @@
     <meta property="og:description" content="PMB PEI">
 
     <!-- PAGE TITLE HERE -->
-    <title>Daftar | PMB PEI</title>
+    <title>Daftar Akun</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('sipenmaru/images/logo.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('sipenmaru/images/lambang_kabupaten_banyumas.png') }}">
     <link href="{{ asset('sipenmaru/css/style.css') }}" rel="stylesheet">
 
 </head>
@@ -31,12 +31,12 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <div class="text-center">
-                                        <a href="index"><img src="{{ asset('sipenmaru/images/logo.png') }}" alt=""
+                                        <a href="index"><img src="{{ asset('sipenmaru/images/lambang_kabupaten_banyumas.png') }}" alt=""
                                                 width="100px"> </a>
                                     </div>
                                     <h4 class="text-center">Daftarkan akunmu</h4>
-                                    <form method="POST" action="/signup">
-                                        {{ csrf_field() }}
+                                    <form action="/signup" method="post" enctype="multipart/form-data">
+                                        @csrf
 
                                         @if (session()->has('loginError'))
                                             <div class="alert alert-danger" role="alert">
@@ -49,8 +49,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                 <input type="text" class="form-control"
-                                                    placeholder="Masukkan nama lengkap.." name="name"
-                                                    value="{{ old('name') }}">
+                                                    placeholder="Masukkan nama lengkap.." name="name" id="name">
                                                 @error('name')
                                                     <div class="alert alert-warning" role="alert">
                                                         <strong>Warning!</strong>
@@ -63,8 +62,8 @@
                                             <label class="text-label form-label">Email</label>
                                             <div class="input-group">
                                                 <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
-                                                <input type="text" class="form-control" placeholder="Masukkan email.."
-                                                    name="email" value="{{ old('email') }}">
+                                                <input type="email" class="form-control" placeholder="Masukkan email.."
+                                                    name="email" id="email">
                                                 @error('email')
                                                     <div class="alert alert-warning" role="alert">
                                                         <strong>Warning!</strong>
@@ -75,14 +74,11 @@
                                         </div>
                                         <div class="mb-2">
                                             <label class="text-label form-label">Kata Sandi *</label>
-                                            <div class="input-group transparent-append">
+                                            <div class="input-group ">
                                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                                <input type="password" class="form-control" id="dlab-password"
+                                                <input type="password" class="form-control" id="password"
                                                     placeholder="Masukkan  kata sandi..." name="password">
-                                                <span class="input-group-text show-pass">
-                                                    <i class="fa fa-eye-slash"></i>
-                                                    <i class="fa fa-eye"></i>
-                                                </span>
+                                                    
                                                 <div class="invalid-feedback">
                                                     Masukkan ulang kata sandi.
                                                 </div>
@@ -100,7 +96,7 @@
                                         </div>
                                     </form>
                                     <div class="new-account mt-3 text-center">
-                                        <p>Sudah memiliki akun? <a class="text-primary" href="/login">Sign up</a></p>
+                                        <p>Sudah memiliki akun? <a class="text-primary" href="/login">Log In</a></p>
                                     </div>
                                 </div>
                             </div>

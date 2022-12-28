@@ -38614,7 +38614,7 @@ table.dataTable.display tbody td {
     }
 }
 
-@media only screen and (max-width: 87.5rem) {
+@media only screen and (max-width: 90rem) {
     .side-bar-profile {
         display: none;
     }

@@ -18,7 +18,7 @@
     <title>@yield('title')</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('sipenmaru/images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('sipenmaru/images/lambang_kabupaten_banyumas.png') }}">
 
     <!-- Datatable -->
     <link href="{{ asset('sipenmaru/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
@@ -38,7 +38,6 @@
     <link rel="stylesheet" href="{{ asset('sipenmaru/vendor/pickadate/themes/default.css') }}">
     <link rel="stylesheet" href="{{ asset('sipenmaru/vendor/pickadate/themes/default.date.css') }}">
     <link href="../icon.css?family=Material+Icons" rel="stylesheet">
-
     <!-- Style css -->
     <link href="{{ asset('sipenmaru/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sipenmaru/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
@@ -52,6 +51,14 @@
     <link href="{{ asset('sipenmaru/css/style.css') }}" rel="stylesheet">
 
 </head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    html * {
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
 
 <body>
     @include('sweetalert::alert')
@@ -78,9 +85,9 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index" class="brand-logo">
-                <img alt="image" width="25" src="{{ asset('sipenmaru/images/logo.png') }}">
+
                 <div class="brand-title">
-                    <h2 class="">PMB PEI</h2>
+                    <h2 class="">Sokulon</h2>
                 </div>
             </a>
             <div class="nav-control">
@@ -292,17 +299,16 @@
 
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                                   
                                     <img class="avatar-lg rounded-circle img-thumbnail" src="{{ asset('sipenmaru/images/ava.png') }}" alt="" width="50px" />
-                                    
+
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="profile" class="dropdown-item ai-icon">
+                                    <a href="/profile" class="dropdown-item ai-icon">
                                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
-                                        <span class="ms-2">Profil </span>
+                                        <span href="/profile" class="ms-2">Profile </span>
                                     </a>
                                     <a href="/logout" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -310,7 +316,7 @@
                                             <polyline points="16 17 21 12 16 7"></polyline>
                                             <line x1="21" y1="12" x2="9" y2="12"></line>
                                         </svg>
-                                        <span class="ms-2">Logout </span>
+                                        <span href="/logout" class="ms-2">Logout </span>
                                     </a>
                                 </div>
                             </li>
@@ -330,53 +336,45 @@
         <div class="dlabnav">
 
             <div class="dlabnav-scroll">
-                @auth
                 <div class="sidebar-user text-center">
 
                     <a href="profile">
 
                         <img class="avatar-lg rounded-circle img-thumbnail" src="{{ asset('sipenmaru/images/ava.png') }}" alt="" width="75px" />
 
+
                         <div class="badge-bottom"><span class="badge badge-primary">
-                                123
+                                @if (\Illuminate\Support\Facades\Auth::check())
+                                @if (\Illuminate\Support\Facades\Auth::user()->role == 'member')
+                                Pengguna
+                                @else
+                                Administrator
+                                @endif
+                                @endif
+
                             </span>
                         </div>
                         <h6 class="mt-3 f-14 f-w-600">
 
-                            {{ $user->name }}
+                            {{$user->name}}
 
                         </h6>
                     </a>
-                </div>
 
-                <div class="side-bar-profile">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <div class="side-bar-profile-img">
+                    <div class="side-bar-profile" style="padding: 40px;">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="side-bar-profile-img">
+                                <img class="avatar-lg rounded-circle img-thumbnail" src="{{ asset('sipenmaru/images/ava.png') }}" alt="" />
+                            </div>
+                            <div class="profile-info1" style="text-align: left !important; margin-left:5px">
+                                <h4 class="fs-16 font-w500">{{ $user->name }}</h4>
+                                <h6 style="font-size: 11px;">{{ $user->email }}</h6>
+                            </div>
 
-                            <img class="avatar-lg rounded-circle img-thumbnail" src="{{ asset('sipenmaru/images/ava.png') }}" alt="" />
-
-                            <!--<img src="images/user.jpg" alt="">-->
-                        </div>
-                        <div class="profile-info1">
-                            <h4 class="fs-18 font-w500">{{ $user->name }}</h4>
-                            <span>{{ $user->email }}</span>
-                        </div>
-                        <div class="profile-button">
-                            <i class="fas fa-caret-down scale5 text-light"></i>
                         </div>
                     </div>
-                </div>
-                @section('menu')@show
+                    @section('menu')@show
 
-
-
-                <div class="copyright">
-                    <p><strong>SIPENMARU PEI </strong> ©
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script> All Rights Reserved
-                    </p>
-                    <p class="fs-12">Made with <span class="heart"></span> by Luthfiyah Sakinah</p>
                 </div>
             </div>
         </div>
@@ -408,9 +406,7 @@
                 <p>Copyright ©
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> <br>
-                    Designed &amp; Developed by <a href="https://www.instagram.com/piaaasan/" target="_blank">Luthfiyah
-                        Sakinah</a>
+                    </script>
                 </p>
             </div>
         </div>
